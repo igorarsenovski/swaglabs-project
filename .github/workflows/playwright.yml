@@ -1,0 +1,53 @@
+name: Playwright Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npm run test:smoke
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-report
+          path: playwright-report
+      - run: npx allure generate ./allure-results --clean -o ./allure-report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report-smoke
+          path: allure-report
+
+  full:
+    runs-on: ubuntu-latest
+    needs: smoke
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npm run test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-report
+          path: playwright-report
+      - run: npx allure generate ./allure-results --clean -o ./allure-report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report-full
+          path: allure-report
