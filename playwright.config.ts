@@ -5,10 +5,7 @@ export default defineConfig({
   timeout: 30_000,
   expect: { timeout: 7_500 },
   retries: 1,
-  reporter: [
-    ['html', { open: 'never' }],
-    ['allure-playwright']
-  ],
+  reporter: [['html', { open: 'never' }], ['allure-playwright']],
   use: {
     baseURL: 'https://www.saucedemo.com',
     headless: true,

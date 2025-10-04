@@ -9,8 +9,20 @@ import { USERS, PRODUCTS } from '../../utils/test-data';
  * Prompt: Checkout with missing fields shows errors.
  */
 const cases = [
-  { label: 'missing last name',  first: 'Igor',   last: '',       postal: '1000', error: 'Last Name is required'  },
-  { label: 'missing postal',     first: 'Igor',   last: 'Tester', postal: '',     error: 'Postal Code is required'}
+  {
+    label: 'missing last name',
+    first: 'Igor',
+    last: '',
+    postal: '1000',
+    error: 'Last Name is required',
+  },
+  {
+    label: 'missing postal',
+    first: 'Igor',
+    last: 'Tester',
+    postal: '',
+    error: 'Postal Code is required',
+  },
 ];
 
 for (const c of cases) {

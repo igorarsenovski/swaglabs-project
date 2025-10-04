@@ -16,7 +16,7 @@ test('AI: sort by price high→low shows descending prices', async ({ page }) =>
   await expect(sort).toHaveValue('hilo');
 
   const priceTexts = await page.locator('.inventory_item_price').allTextContents();
-  const prices = priceTexts.map(t => parseFloat(t.replace('$', '')));
+  const prices = priceTexts.map((t) => parseFloat(t.replace('$', '')));
   const sorted = [...prices].sort((a, b) => b - a);
   expect(prices).toEqual(sorted);
 });

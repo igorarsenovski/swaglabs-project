@@ -1,4 +1,5 @@
 import { Page, expect } from '@playwright/test';
+
 export class InventoryPage {
   private itemCard = '.inventory_item';
   private cartLink = '.shopping_cart_link';
@@ -7,20 +8,28 @@ export class InventoryPage {
   private price = '.inventory_item_price';
   private sortSelect = '[data-test="product-sort-container"]';
   private inventoryList = '.inventory_list';
+
   constructor(private page: Page) {}
+
   async waitUntilLoaded() {
     await this.page.locator(this.inventoryList).waitFor({ state: 'visible' });
     await this.page.locator(this.sortSelect).waitFor({ state: 'visible' });
   }
+
   async addItemByName(name: string) {
     const card = this.page.locator(this.itemCard).filter({ hasText: name });
     await card.locator('button:has-text("Add to cart")').click();
   }
+
   async removeItemByName(name: string) {
     const card = this.page.locator(this.itemCard).filter({ hasText: name });
     await card.locator('button:has-text("Remove")').click();
   }
-  async openCart() { await this.page.click(this.cartLink); }
+
+  async openCart() {
+    await this.page.click(this.cartLink);
+  }
+
   async assertCartBadgeCount(expected: number) {
     if (expected === 0) {
       await expect(this.page.locator(this.cartBadge)).toHaveCount(0);
@@ -28,16 +37,20 @@ export class InventoryPage {
       await expect(this.page.locator(this.cartBadge)).toHaveText(String(expected));
     }
   }
+
   async openProduct(name: string) {
     await this.page.locator(this.itemCard).filter({ hasText: name }).locator(this.name).click();
   }
+
   async readAllNames(): Promise<string[]> {
     return await this.page.locator(this.name).allTextContents();
   }
+
   async readAllPrices(): Promise<number[]> {
     const texts = await this.page.locator(this.price).allTextContents();
     return texts.map((t) => Number(t.replace('$', '').trim()));
   }
+
   async setSortByValue(value: 'az' | 'za' | 'lohi' | 'hilo') {
     const dropdown = this.page.locator(this.sortSelect);
     await dropdown.waitFor({ state: 'visible' });

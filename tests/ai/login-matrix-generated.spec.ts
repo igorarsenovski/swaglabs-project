@@ -6,7 +6,7 @@ import { LoginPage } from '../../pages/LoginPage';
  */
 const matrix = [
   { name: 'standard_user', username: 'standard_user', password: 'secret_sauce' },
-  { name: 'problem_user',  username: 'problem_user',  password: 'secret_sauce' },
+  { name: 'problem_user', username: 'problem_user', password: 'secret_sauce' },
 ];
 
 for (const u of matrix) {

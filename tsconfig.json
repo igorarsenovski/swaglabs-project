@@ -8,20 +8,9 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "types": [
-      "node",
-      "@playwright/test"
-    ],
-    "lib": [
-      "ES2020",
-      "DOM"
-    ],
+    "types": ["node", "@playwright/test"],
+    "lib": ["ES2020", "DOM"],
     "resolveJsonModule": true
   },
-  "include": [
-    "tests",
-    "pages",
-    "utils",
-    "playwright.config.ts"
-  ]
+  "include": ["tests", "pages", "utils", "playwright.config.ts"]
 }

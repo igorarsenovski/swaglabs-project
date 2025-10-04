@@ -2,11 +2,13 @@ export const USERS = {
   standard: { username: 'standard_user', password: 'secret_sauce' },
   locked: { username: 'locked_out_user', password: 'secret_sauce' },
 };
+
 export const CUSTOMER = {
   firstName: 'Igor',
   lastName: 'Tester',
   postalCode: '1000',
 };
+
 export const PRODUCTS = [
   'Sauce Labs Backpack',
   'Sauce Labs Bike Light',
