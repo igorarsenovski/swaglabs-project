@@ -8,6 +8,9 @@ export class CheckoutPage {
   private finishBtn = '#finish';
   private completeHeader = '.complete-header';
   private error = '[data-test="error"]';
+  private itemTotal = '.summary_subtotal_label';
+  private tax = '.summary_tax_label';
+  private total = '.summary_total_label';
 
   constructor(private page: Page) {}
 
@@ -28,4 +31,16 @@ export class CheckoutPage {
   async assertErrorContains(text: string) {
     await expect(this.page.locator(this.error)).toContainText(text);
   }
+  private toNum(s: string | null) { return Number((s ?? '').replace(/[^0-9.]/g, '')); }
+
+  async readItemTotal(): Promise<number> {
+    return this.toNum(await this.page.locator(this.itemTotal).textContent());
+  }
+  async readTax(): Promise<number> {
+    return this.toNum(await this.page.locator(this.tax).textContent());
+  }
+  async readTotal(): Promise<number> {
+    return this.toNum(await this.page.locator(this.total).textContent());
+  }
+
 }
