@@ -13,7 +13,6 @@ test('logout returns to login and cart persists across login', async ({ page }) 
   await inventory.addItemByName(PRODUCTS[0]);
   await inventory.assertCartBadgeCount(1);
 
-  // Open the burger menu and logout
   const menuBtn = page.locator('#react-burger-menu-btn');
   await expect(menuBtn).toBeVisible();
   await menuBtn.click();
@@ -22,11 +21,9 @@ test('logout returns to login and cart persists across login', async ({ page }) 
   await expect(logoutLink).toBeVisible();
   await logoutLink.click();
 
-  // Back on login page
   await expect(page).toHaveURL(/^https:\/\/www\.saucedemo\.com\/?$/);
   await expect(page.locator('#login-button')).toBeVisible();
 
-  // Log in again with same user → cart should still show 1
   await login.login(USERS.standard.username, USERS.standard.password);
   await expect(page).toHaveURL(/.*inventory\.html/);
   await inventory.assertCartBadgeCount(1);

@@ -13,12 +13,10 @@ test('reset app state clears cart badge', async ({ page }) => {
   await inventory.addItemByName(PRODUCTS[0]);
   await inventory.assertCartBadgeCount(1);
 
-  // Open menu → Reset App State
   await page.click('#react-burger-menu-btn');
   const resetLink = page.locator('#reset_sidebar_link');
   await expect(resetLink).toBeVisible();
   await resetLink.click();
 
-  // After reset, the badge disappears
   await inventory.assertCartBadgeCount(0);
 });

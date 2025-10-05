@@ -13,21 +13,17 @@ test('@regression order summary totals are correct', async ({ page }) => {
   await login.open();
   await login.login(USERS.standard.username, USERS.standard.password);
 
-
   const inv = new InventoryPage(page);
   await inv.addItemByName(PRODUCTS[0]);
   await inv.addItemByName(PRODUCTS[1]);
   await inv.openCart();
 
-
   const cart = new CartPage(page);
   await cart.checkout();
-
 
   const co = new CheckoutPage(page);
   await co.fillCustomer('Igor', 'Tester', '1000');
   await co.continue();
-
 
   const itemTotalText = await page.locator('.summary_subtotal_label').textContent();
   const taxText = await page.locator('.summary_tax_label').textContent();      
