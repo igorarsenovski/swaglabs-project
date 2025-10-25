@@ -9,11 +9,25 @@ export const CUSTOMER = {
   postalCode: '1000',
 };
 
-export const PRODUCTS = [
-  'Sauce Labs Backpack',
-  'Sauce Labs Bike Light',
-  'Sauce Labs Bolt T-Shirt',
-  'Sauce Labs Fleece Jacket',
-  'Sauce Labs Onesie',
-  'Test.allTheThings() T-Shirt (Red)',
-];
+export const PRODUCTS = {
+  BACKPACK: {
+    name: 'Sauce Labs Backpack',
+    sku: 'item-4',
+    slug: '/inventory-item.html?id=4',
+  },
+  BIKE_LIGHT: {
+    name: 'Sauce Labs Bike Light',
+    sku: 'item-0',
+    slug: '/inventory-item.html?id=0',
+  },
+  TSHIRT: {
+    name: 'Sauce Labs Bolt T-Shirt',
+    sku: 'item-1',
+    slug: '/inventory-item.html?id=1',
+  },
+  JACKET: {
+    name: 'Sauce Labs Fleece Jacket',
+    sku: 'item-5',
+    slug: '/inventory-item.html?id=5',
+  },
+};

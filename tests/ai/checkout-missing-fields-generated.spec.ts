@@ -32,7 +32,7 @@ for (const c of cases) {
     await login.login(USERS.standard.username, USERS.standard.password);
 
     const inventory = new InventoryPage(page);
-    await inventory.addItemByName(PRODUCTS[0]);
+    await inventory.addItemByName(PRODUCTS.BACKPACK.name);
     await inventory.openCart();
 
     const cart = new CartPage(page);
