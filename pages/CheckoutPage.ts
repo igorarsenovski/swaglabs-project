@@ -31,7 +31,9 @@ export class CheckoutPage {
   async assertErrorContains(text: string) {
     await expect(this.page.locator(this.error)).toContainText(text);
   }
-  private toNum(s: string | null) { return Number((s ?? '').replace(/[^0-9.]/g, '')); }
+  private toNum(s: string | null) {
+    return Number((s ?? '').replace(/[^0-9.]/g, ''));
+  }
 
   async readItemTotal(): Promise<number> {
     return this.toNum(await this.page.locator(this.itemTotal).textContent());
@@ -42,5 +44,4 @@ export class CheckoutPage {
   async readTotal(): Promise<number> {
     return this.toNum(await this.page.locator(this.total).textContent());
   }
-
 }

@@ -2,7 +2,6 @@
 
 - This project demonstrates a complete automated testing framework for the Swag Labs web application using Playwright and TypeScript, following the Page Object Model and integrated CI/CD with GitHub Actions and Allure reporting.
 
-
 ## Run locally
 
 ```bash
@@ -22,7 +21,6 @@ npm run report:open
 npm run allure:gen
 npm run allure:open
 ```
-
 
 ## Test coverage
 

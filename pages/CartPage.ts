@@ -6,7 +6,7 @@ export class CartPage {
 
   constructor(private page: Page) {}
 
-  items() : Locator{
+  items(): Locator {
     return this.page.locator(this.cartItem);
   }
 
