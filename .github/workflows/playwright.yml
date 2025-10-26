@@ -3,7 +3,7 @@ name: Playwright Tests
 on:
   push:
   pull_request:
-  workflow_dispatch: # allows manual trigger too
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,6 +14,8 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:v1.56.1-jammy
+    env:
+      HOME: /root
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,6 +39,8 @@ jobs:
   full:
     runs-on: ubuntu-latest
     container: mcr.microsoft.com/playwright:v1.56.1-jammy
+    env:
+      HOME: /root
     needs: smoke
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +56,6 @@ jobs:
           name: full-report
           path: playwright-report
       - run: npx allure generate ./allure-results --clean -o ./allure-report
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
