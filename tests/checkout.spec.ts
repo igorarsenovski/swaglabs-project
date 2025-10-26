@@ -1,17 +1,14 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
-import { USERS, PRODUCTS, CUSTOMER } from '../utils/test-data';
+import { PRODUCTS, CUSTOMER } from '../utils/test-data';
 
 test.describe.configure({ mode: 'parallel' });
 
 test.describe('Checkout', () => {
   test('complete order with two items @smoke', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
@@ -29,9 +26,7 @@ test.describe('Checkout', () => {
   });
 
   test('missing first name blocks checkout @regression', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
@@ -47,9 +42,7 @@ test.describe('Checkout', () => {
   });
 
   test('order summary totals are correct @regression', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);

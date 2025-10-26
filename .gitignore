@@ -15,3 +15,6 @@ yarn-error.log*
 
 # Editors
 .vscode/
+
+# Storage State
+storageState/*.json

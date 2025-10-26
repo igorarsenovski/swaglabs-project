@@ -1,16 +1,13 @@
 import { test } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
-import { USERS, PRODUCTS } from '../utils/test-data';
+import { PRODUCTS } from '../utils/test-data';
 
 test.describe.configure({ mode: 'parallel' });
 
 test.describe('Cart', () => {
   test('add item shows in cart @smoke', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
@@ -21,9 +18,7 @@ test.describe('Cart', () => {
   });
 
   test('remove item from cart updates contents @regression', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);

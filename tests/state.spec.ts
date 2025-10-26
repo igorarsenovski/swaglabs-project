@@ -1,14 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
-import { USERS, PRODUCTS } from '../utils/test-data';
+import { PRODUCTS } from '../utils/test-data';
 
 test.describe('App State & Persistence', () => {
   test('reset app state clears cart badge', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
-    await expect(page).toHaveURL(/.*inventory\.html/);
+    await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
