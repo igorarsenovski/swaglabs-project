@@ -6,7 +6,7 @@ import { PRODUCTS } from '../utils/test-data';
 test.describe.configure({ mode: 'parallel' });
 
 test.describe('Cart', () => {
-  test('add item shows in cart @smoke', async ({ page }) => {
+  test('Add item shows in cart @smoke', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
@@ -17,7 +17,7 @@ test.describe('Cart', () => {
     await cart.assertHasItem(PRODUCTS.BACKPACK.name);
   });
 
-  test('remove item from cart updates contents @regression', async ({ page }) => {
+  test('Remove item from cart updates contents @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);

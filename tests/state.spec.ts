@@ -3,7 +3,7 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { PRODUCTS } from '../utils/test-data';
 
 test.describe('App State & Persistence', () => {
-  test('reset app state clears cart badge', async ({ page }) => {
+  test('Reset app state clears cart badge', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);

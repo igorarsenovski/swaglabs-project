@@ -25,7 +25,7 @@ test.describe('Checkout', () => {
     await checkout.assertOrderCompleted();
   });
 
-  test('missing first name blocks checkout @regression', async ({ page }) => {
+  test('Missing first name blocks checkout @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
@@ -41,7 +41,7 @@ test.describe('Checkout', () => {
     await checkout.assertErrorContains('First Name is required');
   });
 
-  test('order summary totals are correct @regression', async ({ page }) => {
+  test('Order summary totals are correct @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);

@@ -12,5 +12,5 @@
     "lib": ["ES2020", "DOM"],
     "resolveJsonModule": true
   },
-  "include": ["tests", "pages", "utils", "playwright.config.ts"]
+  "include": ["tests", "pages", "utils", "playwright.config.ts", "ai"]
 }

@@ -4,7 +4,7 @@ import { InventoryPage } from '../pages/InventoryPage';
 test.describe.configure({ mode: 'parallel' });
 
 test.describe('Sorting', () => {
-  test('sort by price low→high yields ascending prices @regression', async ({ page }) => {
+  test('Sort by price low→high yields ascending prices @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
@@ -15,7 +15,7 @@ test.describe('Sorting', () => {
     expect(prices).toEqual(sorted);
   });
 
-  test('sort by price high→low yields descending prices @regression', async ({ page }) => {
+  test('Sort by price high→low yields descending prices @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
@@ -26,7 +26,7 @@ test.describe('Sorting', () => {
     expect(prices).toEqual(sorted);
   });
 
-  test('sort by name A→Z yields ascending alphabetical order @regression', async ({ page }) => {
+  test('Sort by name A→Z yields ascending alphabetical order @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);
@@ -37,7 +37,7 @@ test.describe('Sorting', () => {
     expect(names).toEqual(sorted);
   });
 
-  test('sort by name Z→A yields descending alphabetical order @regression', async ({ page }) => {
+  test('Sort by name Z→A yields descending alphabetical order @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
 
     const inventory = new InventoryPage(page);

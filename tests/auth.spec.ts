@@ -4,14 +4,14 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { USERS, PRODUCTS } from '../utils/test-data';
 
 test.describe('Authentication & Access Control', () => {
-  test('valid login redirects to inventory @smoke', async ({ page }) => {
+  test('Valid login redirects to inventory @smoke', async ({ page }) => {
     const login = new LoginPage(page);
     await login.open();
     await login.login(USERS.standard.username, USERS.standard.password);
     await login.assertOnInventory();
   });
 
-  test('invalid login shows error @regression', async ({ page }) => {
+  test('Invalid login shows error @regression', async ({ page }) => {
     const login = new LoginPage(page);
     await login.open();
     await login.login('invalid_user', 'wrong_pass');
@@ -25,13 +25,13 @@ test.describe('Authentication & Access Control', () => {
     await login.assertErrorContains('locked out');
   });
 
-  test('unauthenticated users are redirected from inventory @regression', async ({ page }) => {
+  test('Unauthenticated users are redirected from inventory @regression', async ({ page }) => {
     await page.goto('https://www.saucedemo.com/inventory.html');
     await expect(page).toHaveURL(/^https:\/\/www\.saucedemo\.com\/?$/);
     await expect(page.locator('#login-button')).toBeVisible();
   });
 
-  test('authenticated user can open cart directly @regression', async ({ page }) => {
+  test('Authenticated user can open cart directly @regression', async ({ page }) => {
     const login = new LoginPage(page);
     await login.open();
     await login.login(USERS.standard.username, USERS.standard.password);
@@ -41,7 +41,7 @@ test.describe('Authentication & Access Control', () => {
     await expect(page.locator('[data-test="continue-shopping"]')).toBeVisible();
   });
 
-  test('logout returns to login and cart persists across login', async ({ page }) => {
+  test('Logout returns to login and cart persists across login', async ({ page }) => {
     const login = new LoginPage(page);
     await login.open();
     await login.login(USERS.standard.username, USERS.standard.password);
