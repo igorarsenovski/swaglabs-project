@@ -3,11 +3,16 @@ import { Page, expect, Locator } from '@playwright/test';
 export class CartPage {
   private cartItem = '.cart_item';
   private checkoutBtn = '[data-test="checkout"]';
+  private cartList = '.cart_list';
 
   constructor(private page: Page) {}
 
   items(): Locator {
     return this.page.locator(this.cartItem);
+  }
+
+  async assertVisible() {
+    await expect(this.page.locator(this.cartList)).toBeVisible();
   }
 
   async assertHasItem(name: string) {

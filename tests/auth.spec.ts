@@ -1,69 +1,74 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
+import { CartPage } from '../pages/CartPage';
 import { USERS, PRODUCTS } from '../utils/test-data';
 
-test.describe('Authentication & Access Control', () => {
-  test('Valid login redirects to inventory @smoke', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
-    await login.assertOnInventory();
+test.describe('Authentication & access control', () => {
+  test('standard user can log in and see inventory @smoke', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await loginPage.open();
+    await loginPage.login(USERS.standard.username, USERS.standard.password);
+    await loginPage.assertOnInventory();
   });
 
-  test('Invalid login shows error @regression', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login('invalid_user', 'wrong_pass');
-    await login.assertErrorContains('Epic sadface');
+  test('invalid credentials show error message @regression', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await loginPage.open();
+    await loginPage.login('invalid_user', 'wrong_password');
+    await loginPage.assertErrorContains('Epic sadface');
   });
 
-  test('locked_out_user shows error @regression', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.locked.username, USERS.locked.password);
-    await login.assertErrorContains('locked out');
+  test('locked out user cannot log in @regression', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await loginPage.open();
+    await loginPage.login(USERS.locked.username, USERS.locked.password);
+    await loginPage.assertErrorContains('locked out');
   });
 
-  test('Unauthenticated users are redirected from inventory @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
-    await expect(page).toHaveURL(/^https:\/\/www\.saucedemo\.com\/?$/);
-    await expect(page.locator('#login-button')).toBeVisible();
+  test('unauthenticated user is redirected from inventory to login @regression', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+
+    await page.goto('/inventory.html');
+
+    await loginPage.assertOnLoginPage();
   });
 
-  test('Authenticated user can open cart directly @regression', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
+  test('authenticated user can open cart directly @regression', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const inventoryPage = new InventoryPage(page);
+    const cartPage = new CartPage(page);
 
-    await page.goto('https://www.saucedemo.com/cart.html');
-    await expect(page).toHaveURL(/cart\.html/);
-    await expect(page.locator('[data-test="continue-shopping"]')).toBeVisible();
+    await loginPage.open();
+    await loginPage.login(USERS.standard.username, USERS.standard.password);
+    await loginPage.assertOnInventory();
+
+    await page.goto('/cart.html');
+
+    await cartPage.assertVisible();
   });
 
-  test('Logout returns to login and cart persists across login', async ({ page }) => {
-    const login = new LoginPage(page);
-    await login.open();
-    await login.login(USERS.standard.username, USERS.standard.password);
-    await expect(page).toHaveURL(/.*inventory\.html/);
+  test('logout returns to login and cart badge persists across relogin @regression', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const inventoryPage = new InventoryPage(page);
 
-    const inventory = new InventoryPage(page);
-    await inventory.addItemByName(PRODUCTS.BACKPACK.name);
-    await inventory.assertCartBadgeCount(1);
+    await loginPage.open();
+    await loginPage.login(USERS.standard.username, USERS.standard.password);
+    await loginPage.assertOnInventory();
 
-    const menuBtn = page.locator('#react-burger-menu-btn');
-    await expect(menuBtn).toBeVisible();
-    await menuBtn.click();
+    await inventoryPage.addItemByName(PRODUCTS.BACKPACK.name);
+    await inventoryPage.assertCartBadgeCount(1);
 
-    const logoutLink = page.locator('#logout_sidebar_link');
-    await expect(logoutLink).toBeVisible();
-    await logoutLink.click();
+    await inventoryPage.logout();
 
-    await expect(page).toHaveURL(/^https:\/\/www\.saucedemo\.com\/?$/);
-    await expect(page.locator('#login-button')).toBeVisible();
+    await loginPage.assertOnLoginPage();
 
-    await login.login(USERS.standard.username, USERS.standard.password);
-    await expect(page).toHaveURL(/.*inventory\.html/);
-    await inventory.assertCartBadgeCount(1);
+    await loginPage.login(USERS.standard.username, USERS.standard.password);
+    await loginPage.assertOnInventory();
+
+    await inventoryPage.assertCartBadgeCount(1);
   });
 });

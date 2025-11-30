@@ -5,7 +5,7 @@ test.describe.configure({ mode: 'parallel' });
 
 test.describe('Sorting', () => {
   test('Sort by price low→high yields ascending prices @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.setSortByValue('lohi');
@@ -16,7 +16,7 @@ test.describe('Sorting', () => {
   });
 
   test('Sort by price high→low yields descending prices @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.setSortByValue('hilo');
@@ -27,7 +27,7 @@ test.describe('Sorting', () => {
   });
 
   test('Sort by name A→Z yields ascending alphabetical order @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.setSortByValue('az');
@@ -38,7 +38,7 @@ test.describe('Sorting', () => {
   });
 
   test('Sort by name Z→A yields descending alphabetical order @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.setSortByValue('za');

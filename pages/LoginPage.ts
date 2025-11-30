@@ -17,6 +17,12 @@ export class LoginPage {
     await this.page.fill(this.password, password);
     await this.page.click(this.loginBtn);
   }
+
+  async assertOnLoginPage() {
+    await expect(this.page).toHaveURL(/.*saucedemo\.com\/?/);
+    await expect(this.page.locator(this.loginBtn)).toBeVisible();
+  }
+  
   async assertOnInventory() {
     await expect(this.page).toHaveURL(/.*inventory/);
   }

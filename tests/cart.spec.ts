@@ -7,7 +7,7 @@ test.describe.configure({ mode: 'parallel' });
 
 test.describe('Cart', () => {
   test('Add item shows in cart @smoke', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
@@ -18,7 +18,7 @@ test.describe('Cart', () => {
   });
 
   test('Remove item from cart updates contents @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);

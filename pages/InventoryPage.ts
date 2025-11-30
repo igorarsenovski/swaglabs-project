@@ -8,6 +8,8 @@ export class InventoryPage {
   private price = '.inventory_item_price';
   private sortSelect = '[data-test="product-sort-container"]';
   private inventoryList = '.inventory_list';
+  private menuButton = '#react-burger-menu-btn';
+  private logoutLink = '#logout_sidebar_link';
 
   constructor(private page: Page) {}
 
@@ -56,5 +58,16 @@ export class InventoryPage {
     await dropdown.waitFor({ state: 'visible' });
     await dropdown.selectOption(value);
     await expect(dropdown).toHaveValue(value);
+  }
+
+  async openMenu() {
+    await this.page.click(this.menuButton);
+  }
+
+  async logout() {
+    await this.openMenu();
+    const logoutLink = this.page.locator(this.logoutLink);
+    await expect(logoutLink).toBeVisible();
+    await logoutLink.click();
   }
 }

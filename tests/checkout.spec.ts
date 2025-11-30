@@ -8,7 +8,7 @@ test.describe.configure({ mode: 'parallel' });
 
 test.describe('Checkout', () => {
   test('complete order with two items @smoke', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
@@ -26,7 +26,7 @@ test.describe('Checkout', () => {
   });
 
   test('Missing first name blocks checkout @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
@@ -42,7 +42,7 @@ test.describe('Checkout', () => {
   });
 
   test('Order summary totals are correct @regression', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);

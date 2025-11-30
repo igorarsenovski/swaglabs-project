@@ -4,7 +4,7 @@ import { PRODUCTS } from '../utils/test-data';
 
 test.describe('App State & Persistence', () => {
   test('Reset app state clears cart badge', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com/inventory.html');
+    await page.goto('/inventory.html');
 
     const inventory = new InventoryPage(page);
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
