@@ -10,11 +10,8 @@ test.describe('App State & Persistence', () => {
     await inventory.addItemByName(PRODUCTS.BACKPACK.name);
     await inventory.assertCartBadgeCount(1);
 
-    await page.click('#react-burger-menu-btn');
-    const resetLink = page.locator('#reset_sidebar_link');
-    await expect(resetLink).toBeVisible();
-    await resetLink.click();
-
+    await inventory.resetAppState();
+    
     await inventory.assertCartBadgeCount(0);
   });
 });

@@ -10,6 +10,7 @@ export class InventoryPage {
   private inventoryList = '.inventory_list';
   private menuButton = '#react-burger-menu-btn';
   private logoutLink = '#logout_sidebar_link';
+  private resetLink = '#reset_sidebar_link';
 
   constructor(private page: Page) {}
 
@@ -69,5 +70,12 @@ export class InventoryPage {
     const logoutLink = this.page.locator(this.logoutLink);
     await expect(logoutLink).toBeVisible();
     await logoutLink.click();
+  }
+
+  async resetAppState() {
+  await this.openMenu();
+  const reset = this.page.locator(this.resetLink);
+  await expect(reset).toBeVisible();
+  await reset.click();
   }
 }
