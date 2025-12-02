@@ -8,7 +8,7 @@ test.describe('Authentication & access control', () => {
   test('standard user can log in and see inventory @smoke', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await loginPage.open();
+    await page.goto('/');
     await loginPage.login(USERS.standard.username, USERS.standard.password);
     await loginPage.assertOnInventory();
   });
@@ -16,7 +16,7 @@ test.describe('Authentication & access control', () => {
   test('invalid credentials show error message @regression', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await loginPage.open();
+    await page.goto('/');
     await loginPage.login('invalid_user', 'wrong_password');
     await loginPage.assertErrorContains('Epic sadface');
   });
@@ -24,12 +24,14 @@ test.describe('Authentication & access control', () => {
   test('locked out user cannot log in @regression', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
-    await loginPage.open();
+    await page.goto('/');
     await loginPage.login(USERS.locked.username, USERS.locked.password);
     await loginPage.assertErrorContains('locked out');
   });
 
-  test('unauthenticated user is redirected from inventory to login @regression', async ({ page }) => {
+  test('unauthenticated user is redirected from inventory to login @regression', async ({
+    page,
+  }) => {
     const loginPage = new LoginPage(page);
 
     await page.goto('/inventory.html');
@@ -39,10 +41,9 @@ test.describe('Authentication & access control', () => {
 
   test('authenticated user can open cart directly @regression', async ({ page }) => {
     const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
     const cartPage = new CartPage(page);
 
-    await loginPage.open();
+    await page.goto('/');
     await loginPage.login(USERS.standard.username, USERS.standard.password);
     await loginPage.assertOnInventory();
 
@@ -51,11 +52,13 @@ test.describe('Authentication & access control', () => {
     await cartPage.assertVisible();
   });
 
-  test('logout returns to login and cart badge persists across relogin @regression', async ({ page }) => {
+  test('logout returns to login and cart badge persists across relogin @regression', async ({
+    page,
+  }) => {
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
 
-    await loginPage.open();
+    await page.goto('/');
     await loginPage.login(USERS.standard.username, USERS.standard.password);
     await loginPage.assertOnInventory();
 

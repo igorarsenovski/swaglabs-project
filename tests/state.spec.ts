@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { InventoryPage } from '../pages/InventoryPage';
 import { PRODUCTS } from '../utils/test-data';
 
@@ -11,7 +11,7 @@ test.describe('App State & Persistence', () => {
     await inventory.assertCartBadgeCount(1);
 
     await inventory.resetAppState();
-    
+
     await inventory.assertCartBadgeCount(0);
   });
 });

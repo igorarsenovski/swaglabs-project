@@ -5,6 +5,9 @@
 
 ## Run locally
 
+**Note:** Works on Windows, macOS, and Linux.  
+ Allure reporting requires Java JDK 17.
+
 ```bash
 npm install
 npx playwright install
@@ -28,4 +31,4 @@ npm run ai:generate -- "As a user, I want to filter products by price"
 
 ## AI Test Scenario Generator
 
-This project includes an AI tool that demonstrates how AI can **support** test scenario generation. See [ai/README.md](ai/README.md) for details.
+This project includes an AI tool that demonstrates how AI can support test scenario generation. See [ai/README.md](ai/README.md) for details.

@@ -8,9 +8,12 @@
     "test:ui": "playwright test --ui",
     "test:smoke": "playwright test --grep @smoke",
     "test:regression": "playwright test --grep @regression",
+    "test:clean": "npm run allure:clean && npm test",
     "report:open": "playwright show-report",
     "allure:gen": "allure generate ./allure-results --clean -o ./allure-report",
     "allure:open": "allure open ./allure-report",
+    "allure:clean": "rimraf allure-results allure-report",
+    "allure:full": "npm run allure:clean && npm test && npm run allure:gen",
     "ai:generate": "ts-node ai/testcase-generator.ts",
     "format": "prettier --write .",
     "lint:format": "prettier --check .",
@@ -29,6 +32,7 @@
     "eslint-plugin-playwright": "^2.2.2",
     "ollama": "^0.6.3",
     "prettier": "^3.6.2",
+    "rimraf": "^6.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.0"
   }

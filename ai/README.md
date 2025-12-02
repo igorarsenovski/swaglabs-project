@@ -27,6 +27,7 @@ ollama pull llama3.2
 ```
 
 Other good options:
+
 - `ollama pull phi3` (smaller, faster)
 - `ollama pull qwen2.5` (good quality)
 
@@ -37,6 +38,7 @@ In a separate terminal, start Ollama:
 ```bash
 ollama serve
 ```
+
 Note: On Windows, Ollama runs automatically as a background service after installation.
 You do not need to run ollama serve.
 Simply run ollama list to confirm it’s running.
@@ -78,10 +80,7 @@ Generated scenarios are saved to `ai-output/scenarios-YYYY-MM-DDTHH-MM-SS.json`
       "description": "Verify that products can be sorted by price in ascending order",
       "type": "positive",
       "priority": "high",
-      "preconditions": [
-        "User is logged in as Standard User",
-        "User is on the inventory page"
-      ],
+      "preconditions": ["User is logged in as Standard User", "User is on the inventory page"],
       "steps": [
         "Navigate to inventory page",
         "Click on sort dropdown",

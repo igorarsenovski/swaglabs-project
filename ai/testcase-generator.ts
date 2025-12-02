@@ -151,15 +151,15 @@ function printSummary(data: GeneratedScenarios) {
   console.log('📊 Summary:');
   console.log(`   Total scenarios: ${data.testScenarios.length}`);
 
-  const positiveCount = data.testScenarios.filter(s => s.type === 'positive').length;
-  const negativeCount = data.testScenarios.filter(s => s.type === 'negative').length;
-  const edgeCount = data.testScenarios.filter(s => s.type === 'edge').length;
+  const positiveCount = data.testScenarios.filter((s) => s.type === 'positive').length;
+  const negativeCount = data.testScenarios.filter((s) => s.type === 'negative').length;
+  const edgeCount = data.testScenarios.filter((s) => s.type === 'edge').length;
 
   console.log(`   Positive: ${positiveCount}`);
   console.log(`   Negative: ${negativeCount}`);
   console.log(`   Edge cases: ${edgeCount}`);
 
-  const highPriorityCount = data.testScenarios.filter(s => s.priority === 'high').length;
+  const highPriorityCount = data.testScenarios.filter((s) => s.priority === 'high').length;
   console.log(`   High priority: ${highPriorityCount}`);
   console.log();
 

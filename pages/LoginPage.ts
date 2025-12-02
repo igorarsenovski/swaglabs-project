@@ -8,10 +8,6 @@ export class LoginPage {
 
   constructor(private page: Page) {}
 
-  async open() {
-    await this.page.goto('/');
-  }
-
   async login(username: string, password: string) {
     await this.page.fill(this.username, username);
     await this.page.fill(this.password, password);
@@ -22,7 +18,7 @@ export class LoginPage {
     await expect(this.page).toHaveURL(/.*saucedemo\.com\/?/);
     await expect(this.page.locator(this.loginBtn)).toBeVisible();
   }
-  
+
   async assertOnInventory() {
     await expect(this.page).toHaveURL(/.*inventory/);
   }

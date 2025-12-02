@@ -73,9 +73,9 @@ export class InventoryPage {
   }
 
   async resetAppState() {
-  await this.openMenu();
-  const reset = this.page.locator(this.resetLink);
-  await expect(reset).toBeVisible();
-  await reset.click();
+    await this.openMenu();
+    const reset = this.page.locator(this.resetLink);
+    await expect(reset).toBeVisible();
+    await reset.click();
   }
 }
