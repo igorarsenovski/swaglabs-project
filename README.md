@@ -1,34 +1,34 @@
 # Swag Labs – Playwright + TypeScript Thesis Project
 
-- This project demonstrates a complete automated testing framework for the Swag Labs web application using Playwright and TypeScript, following the Page Object Model and integrated CI/CD with GitHub Actions and Allure reporting.
-- **AI-Assisted Test Generation**: Includes an AI tool that supports test scenario generation using Ollama (local LLM).
+Automated testing framework for Swag Labs using Playwright, TypeScript, Page Object Model, CI/CD with GitHub Actions, and Allure reporting. Includes AI-assisted test scenario generation using Ollama.
 
-## Run locally
+## Prerequisites
 
-**Note:** Works on Windows, macOS, and Linux.  
- Allure reporting requires Java JDK 17.
+- Node.js
+- Java JDK 17 (for Allure reporting)
+
+## Quick Start
 
 ```bash
 npm install
 npx playwright install
 
-# quick subset
-npm run test:smoke
+# Run tests
+npm run test:smoke      # Quick subset
+npm test                # Full suite
+npm run test:headed     # Run with browser visible
+npm run test:ui         # Interactive UI mode
+npm run test:regression # Regression tests only
 
-# full suite
-npm test
+# View reports
+npm run report:open     # Playwright report
+npm run allure:full     # Clean, test, and generate Allure report
+npm run allure:open     # Open Allure report
 
-# open Playwright report
-npm run report:open
-
-# generate & open Allure
-npm run allure:gen
-npm run allure:open
-
-# AI test scenario generation (requires Ollama)
+# AI test generation (requires Ollama)
 npm run ai:generate -- "As a user, I want to filter products by price"
 ```
 
 ## AI Test Scenario Generator
 
-This project includes an AI tool that demonstrates how AI can support test scenario generation. See [ai/README.md](ai/README.md) for details.
+See [ai/README.md](ai/README.md) for details.
